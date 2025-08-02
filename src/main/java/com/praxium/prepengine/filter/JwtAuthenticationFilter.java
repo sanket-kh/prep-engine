@@ -8,7 +8,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Component
+@Getter
+@Setter
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -44,7 +48,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             try {
                 String email = jwtUtil.extractEmail(jwt);
-                Boolean isExpired = jwtUtil.isTokenExpired(jwt);
                 if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     //todo enhance this by fetching user details from DB if needed
                     UserDetail userDetails = userService.loadUserByEmail(email);

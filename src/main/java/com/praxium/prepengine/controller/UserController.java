@@ -3,6 +3,7 @@ package com.praxium.prepengine.controller;
 import com.praxium.prepengine.service.GoogleAuthService;
 import com.praxium.prepengine.service.UserService;
 import com.praxium.prepengine.util.ResponseUtility;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class UserController {
             return ResponseUtility.exceptionResponse();
         }
     }
-    @PostMapping("/user/login")
+    @GetMapping("/user/login")
     public ResponseEntity<Object> authenticateUser(@RequestParam("tokenId") String tokenId) {
         try {
             return googleAuthService.authenticateViaGoogle(tokenId);

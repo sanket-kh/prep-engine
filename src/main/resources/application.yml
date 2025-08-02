@@ -29,7 +29,7 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             user-name-attribute: sub
   jwt:
-    secret: my-jwt-secret
+    secret: 6ceb0b8c3eb251de22d044973b994c0a1069e52fcdeb324a541b29e57a45f3ee
     expiration: 86400000  # 1 day in ms
 
   datasource:

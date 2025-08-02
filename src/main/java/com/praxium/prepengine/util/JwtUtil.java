@@ -1,10 +1,15 @@
 package com.praxium.prepengine.util;
 
+import com.praxium.prepengine.entity.User;
 import com.praxium.prepengine.security.UserDetail;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -13,8 +18,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
-public class JwtUtil {
+@Log4j2
+@Service
+@Getter
+@Setter
+public final class JwtUtil {
     @Value("${spring.jwt.secret}")
     private String secret;
 
@@ -37,8 +45,19 @@ public class JwtUtil {
     }
 
     public String extractEmail(String token) {
-        return extractClaim(token, Claims::getSubject);
+        User user = extractUser(token);
+        return user.getEmail();
     }
+
+    public User extractUser(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("user", User.class);
+    }
+
     public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -51,6 +70,7 @@ public class JwtUtil {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -76,6 +96,19 @@ public class JwtUtil {
             throw new RuntimeException("Invalid signature", e);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Illegal argument token", e);
+        }
+    }
+
+    public User getLoggedInUser() {
+        try {
+            UserDetail userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (CommonUtils.isEmpty(userDetail)) {
+                return null;
+            }
+            return userDetail.getUser();
+        } catch (Exception e) {
+            log.error("JwtServiceImpl :: getLoggedInUser", e);
+            return null;
         }
     }
 
