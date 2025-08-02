@@ -31,5 +31,6 @@ public class UserExamSession {
     @CreationTimestamp
     private LocalDateTime startedAt;
 
+
     private LocalDateTime completedAt;
 }
