@@ -13,6 +13,7 @@ spring:
       chat:
         options:
           model: gpt-3.5-turbo
+        enabled: false
   security:
     oauth2:
       client:

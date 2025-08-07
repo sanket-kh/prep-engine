@@ -1,6 +1,6 @@
 package com.praxium.prepengine.constant;
 
-public class URIConsants {
+public class URIConstants {
     public static final String[] PUBLIC_ACCESS_URI = new String[]{
             "/user/login",
             "/",
@@ -15,3 +15,4 @@ public class URIConsants {
             "/swagger-ui/**",
             "/webjars/**"}; ;
 }
+

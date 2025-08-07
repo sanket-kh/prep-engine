@@ -102,7 +102,7 @@ public final class JwtUtil {
     public User getLoggedInUser() {
         try {
             UserDetail userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (CommonUtils.isEmpty(userDetail)) {
+            if (ObjectUtils.isEmpty(userDetail)) {
                 return null;
             }
             return userDetail.getUser();

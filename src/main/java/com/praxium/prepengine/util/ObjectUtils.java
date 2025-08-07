@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 @UtilityClass
-public class CommonUtils {
+public class ObjectUtils {
 
     // ---------- STRING ----------
     public static boolean isEmpty(String str) {

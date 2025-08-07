@@ -1,6 +1,6 @@
 package com.praxium.prepengine.security;
 
-import com.praxium.prepengine.constant.URIConsants;
+import com.praxium.prepengine.constant.URIConstants;
 import com.praxium.prepengine.enums.Role;
 import com.praxium.prepengine.filter.JwtAuthenticationFilter;
 import com.praxium.prepengine.handler.OAuth2SuccessHandler;
@@ -31,9 +31,9 @@ private final JwtAuthenticationFilter jwtAuthenticationFilter;
        http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(URIConsants.PUBLIC_ACCESS_URI)
+                        .requestMatchers(URIConstants.PUBLIC_ACCESS_URI)
                         .permitAll()
-                        .requestMatchers(URIConsants.USER_ACCESS_URI).hasAnyRole(Role.USER.name(),
+                        .requestMatchers(URIConstants.USER_ACCESS_URI).hasAnyRole(Role.USER.name(),
                                 Role.ADMIN.name())
                         .requestMatchers("/api/v1/**").hasRole(Role.ADMIN.name()) //todo proper role and authorities
                         .anyRequest()

@@ -1,6 +1,6 @@
 package com.praxium.prepengine.filter;
 
-import com.praxium.prepengine.constant.URIConsants;
+import com.praxium.prepengine.constant.URIConstants;
 import com.praxium.prepengine.security.UserDetail;
 import com.praxium.prepengine.service.UserService;
 import com.praxium.prepengine.util.JwtUtil;
@@ -73,7 +73,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
         String path = request.getServletPath();
-        Optional<String> matchedPath = Arrays.stream(URIConsants.PUBLIC_ACCESS_URI).filter(
+        Optional<String> matchedPath = Arrays.stream(URIConstants.PUBLIC_ACCESS_URI).filter(
                 uri -> uri.contains(path)
         ).findFirst();
         return matchedPath.isPresent();

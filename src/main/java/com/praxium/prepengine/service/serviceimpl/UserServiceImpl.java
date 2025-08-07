@@ -5,7 +5,7 @@ import com.praxium.prepengine.entity.User;
 import com.praxium.prepengine.repository.UserRepo;
 import com.praxium.prepengine.security.UserDetail;
 import com.praxium.prepengine.service.UserService;
-import com.praxium.prepengine.util.CommonUtils;
+import com.praxium.prepengine.util.ObjectUtils;
 import com.praxium.prepengine.util.JwtUtil;
 import com.praxium.prepengine.util.ResponseUtility;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<Object> getUserBaseInfo() {
         try {
             User userFromToken = jwtUtil.getLoggedInUser();
-            if (CommonUtils.isEmpty(userFromToken)){
+            if (ObjectUtils.isEmpty(userFromToken)){
                 return ResponseUtility.failureResponseWithMessage(ResponseCode.FAILURE_CODE,"User doesnt exist");
             }
             return ResponseUtility.successResponseWithBody(userFromToken);
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean userExist(String email) {
         User byEmail = userRepo.findByEmail(email);
-        return CommonUtils.isNotEmpty(byEmail);
+        return ObjectUtils.isNotEmpty(byEmail);
     }
 
 }
