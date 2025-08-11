@@ -2,23 +2,20 @@ package com.praxium.prepengine.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.experimental.UtilityClass;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@UtilityClass
 public class JsonUtils {
 
-    private static final ObjectMapper mapper = new ObjectMapper()
-            .enable(SerializationFeature.INDENT_OUTPUT)
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-    private JsonUtils() {
-        // Utility class: prevent instantiation
-    }
+    private static final ObjectMapper mapper= new ObjectMapper().registerModule(new JavaTimeModule());
 
     // 1. Convert object to JSON string
     public static String toJson(Object obj) {
@@ -88,12 +85,14 @@ public class JsonUtils {
 
     // 8. Convert JSON to Map
     public static Map<String, Object> toMap(String json) {
-        return fromJson(json, new TypeReference<Map<String, Object>>() {});
+        return fromJson(json, new TypeReference<Map<String, Object>>() {
+        });
     }
 
     // 9. Convert JSON to List<Map>
     public static List<Map<String, Object>> toList(String json) {
-        return fromJson(json, new TypeReference<List<Map<String, Object>>>() {});
+        return fromJson(json, new TypeReference<List<Map<String, Object>>>() {
+        });
     }
 
     // 10. Convert Map to JSON string

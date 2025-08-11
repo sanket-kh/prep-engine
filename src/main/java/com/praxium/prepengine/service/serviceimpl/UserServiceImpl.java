@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
             if (ObjectUtils.isEmpty(userFromToken)){
                 return ResponseUtility.failureResponseWithMessage(ResponseCode.FAILURE_CODE,"User doesnt exist");
             }
+
             return ResponseUtility.successResponseWithBody(userFromToken);
         }catch (Exception e){
             log.error("UserServiceImpl :: UserService",e);
