@@ -2,7 +2,7 @@ package com.praxium.prepengine.constant;
 
 public class URIConstants {
     public static final String[] PUBLIC_ACCESS_URI = new String[]{
-            "/user/login",
+            "api/user/login",
             "/",
             "/v3/swagger-resources",
             "/swagger-ui/**",

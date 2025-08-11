@@ -2,6 +2,8 @@ package com.praxium.prepengine.service.serviceimpl;
 
 import com.praxium.prepengine.constant.ResponseCode;
 import com.praxium.prepengine.entity.User;
+import com.praxium.prepengine.mapper.UserMapper;
+import com.praxium.prepengine.modal.dto.UserBaseInfoDTO;
 import com.praxium.prepengine.repository.UserRepo;
 import com.praxium.prepengine.security.UserDetail;
 import com.praxium.prepengine.service.UserService;
@@ -28,8 +30,8 @@ public class UserServiceImpl implements UserService {
             if (ObjectUtils.isEmpty(userFromToken)){
                 return ResponseUtility.failureResponseWithMessage(ResponseCode.FAILURE_CODE,"User doesnt exist");
             }
-
-            return ResponseUtility.successResponseWithBody(userFromToken);
+            UserBaseInfoDTO userBaseInfoDTO = UserMapper.mapToBaseUser(userFromToken);
+            return ResponseUtility.successResponseWithBody(userBaseInfoDTO);
         }catch (Exception e){
             log.error("UserServiceImpl :: UserService",e);
             return ResponseUtility.exceptionResponse();

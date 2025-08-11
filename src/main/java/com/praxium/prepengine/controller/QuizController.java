@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(URIPaths.ClassPaths.QUIZ)
-
 public class QuizController {
 
     private final QuizService quizService;

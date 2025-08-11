@@ -1,19 +1,22 @@
 package com.praxium.prepengine.constant;
 
 public interface URIPaths {
-    public interface ClassPaths{
-        public static String USER = "user";
-        public static String QUIZ = "quiz";
+    interface ClassPaths {
+        String API = "api/";
+        String USER = API + "user";
+        String QUIZ = API + "quiz";
 
     }
-    public interface MethodPaths{
-        public static String DETAIL = "/detail";
-        public static String LOGIN = "/login";
-        public static String APTITUDE = "/aptitude";
+
+    interface MethodPaths {
+        String DETAIL = "/detail";
+        String LOGIN = "/login";
+        String APTITUDE = "/aptitude";
 
 
     }
-    public interface SubPaths{
+
+    interface SubPaths {
 
     }
 }

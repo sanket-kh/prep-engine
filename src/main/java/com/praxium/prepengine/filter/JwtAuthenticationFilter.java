@@ -70,12 +70,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    @Override
-    protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        String path = request.getServletPath();
-        Optional<String> matchedPath = Arrays.stream(URIConstants.PUBLIC_ACCESS_URI).filter(
-                uri -> uri.contains(path)
-        ).findFirst();
-        return matchedPath.isPresent();
-    }
+//    @Override
+//    protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
+//        String path = request.getServletPath();
+//        Optional<String> matchedPath = Arrays.stream(URIConstants.PUBLIC_ACCESS_URI).filter(
+//                uri -> uri.contains(path)
+//        ).findFirst();
+//        return matchedPath.isPresent();
+//    }
 }

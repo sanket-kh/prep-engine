@@ -45,17 +45,16 @@ public final class JwtUtil {
     }
 
     public String extractEmail(String token) {
-        User user = extractUser(token);
-        return user.getEmail();
+        Claims claims = extractClaims(token);
+        return claims.get("email", String.class);
     }
 
-    public User extractUser(String token) {
-        Claims claims = Jwts.parserBuilder()
+    public Claims extractClaims(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return claims.get("user", User.class);
     }
 
     public Boolean isTokenExpired(String token) {

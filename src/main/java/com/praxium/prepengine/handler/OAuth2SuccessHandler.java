@@ -18,8 +18,9 @@ public class OAuth2SuccessHandler {
         String email = user.getEmail();
 
         Map<String, Object> claims = new HashMap<>();
-        UserBaseInfoDTO userInfo = UserMapper.mapToBaseUser(user);
-        claims.put("user", userInfo);
+        claims.put("displayName", user.getName());
+        claims.put("email", user.getEmail());
+        claims.put("photoUrl", user.getPhotoUrl());
         String jwt = jwtUtil.generateToken(claims, email);
 
         Map<String, Object> result = new HashMap<>();
